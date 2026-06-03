@@ -1,0 +1,176 @@
+<!--
+  SELVÁ - Quiz de tipo de piel (autocontenido: HTML + CSS + JS, sin librerías).
+  Cómo usar:
+    Opción 1 (página): Online Store > Pages > Add page "quiz" > pulsa <> (Show HTML) y pega TODO esto.
+    Opción 2 (sección): pega dentro de un bloque "Custom Liquid" del tema.
+  Los enlaces usan rutas relativas (/products/...) que funcionan en tu tienda.
+  Para capturar el correo de verdad, conecta el formulario a Klaviyo (ver comentario en el JS).
+-->
+<div id="selva-quiz" class="sq">
+  <div class="sq__head">
+    <p class="sq__kicker">QUIZ · 30 segundos</p>
+    <h2 class="sq__title">Descubre tu rutina SELVÁ ideal</h2>
+    <p class="sq__sub">Responde 4 preguntas y te decimos por dónde empezar.</p>
+    <div class="sq__progress"><span id="sqBar" style="width:0%"></span></div>
+  </div>
+
+  <div id="sqSteps"></div>
+
+  <div id="sqResult" class="sq__result" hidden>
+    <p class="sq__kicker">TU RECOMENDACIÓN</p>
+    <h3 id="sqRecTitle"></h3>
+    <p id="sqRecWhy" class="sq__why"></p>
+    <a id="sqRecCta" class="sq__btn" href="#">Ver producto</a>
+    <p id="sqRecExtra" class="sq__extra"></p>
+
+    <form id="sqEmail" class="sq__email">
+      <p>📩 Te enviamos tu rutina + <strong>10% de descuento</strong>:</p>
+      <div class="sq__emailrow">
+        <input type="email" id="sqEmailInput" placeholder="tu@correo.com" required>
+        <button type="submit">Enviar</button>
+      </div>
+      <small id="sqEmailMsg"></small>
+    </form>
+    <button id="sqRestart" class="sq__restart" type="button">↺ Volver a empezar</button>
+  </div>
+</div>
+
+<style>
+  .sq{max-width:620px;margin:0 auto;padding:1.25rem;font-family:inherit;color:#2B2B2B}
+  .sq__kicker{letter-spacing:.12em;font-size:.72rem;color:#7E9B6E;font-weight:700;margin:0 0 .35rem}
+  .sq__title{font-size:1.6rem;margin:0 0 .35rem;color:#234334}
+  .sq__sub{margin:0 0 1rem;color:#555}
+  .sq__progress{height:8px;background:#e7e0d3;border-radius:999px;overflow:hidden;margin-bottom:1.25rem}
+  .sq__progress span{display:block;height:100%;background:#234334;transition:width .35s ease}
+  .sq__q{font-size:1.15rem;font-weight:600;margin:0 0 .9rem;color:#234334}
+  .sq__opts{display:grid;gap:.6rem}
+  .sq__opt{text-align:left;background:#F4EFE6;border:1px solid rgba(126,155,110,.4);border-radius:12px;padding:.85rem 1rem;cursor:pointer;font-size:1rem;transition:.15s}
+  .sq__opt:hover{border-color:#234334;background:#eee6d7}
+  .sq__result{text-align:center}
+  .sq__result h3{font-size:1.4rem;color:#234334;margin:.25rem 0 .5rem}
+  .sq__why{color:#555;margin:0 auto 1rem;max-width:460px}
+  .sq__btn{display:inline-block;background:#234334;color:#F4EFE6;text-decoration:none;padding:.8rem 1.6rem;border-radius:10px;font-weight:700}
+  .sq__btn:hover{background:#1b3327}
+  .sq__extra{color:#C68B59;font-weight:600;margin:.9rem 0 0}
+  .sq__email{margin:1.5rem auto 0;max-width:420px}
+  .sq__emailrow{display:flex;gap:.5rem;margin-top:.4rem}
+  .sq__email input{flex:1;padding:.7rem .8rem;border:1px solid #ccc;border-radius:10px;font-size:1rem}
+  .sq__email button{background:#C68B59;color:#fff;border:0;border-radius:10px;padding:.7rem 1.1rem;font-weight:700;cursor:pointer}
+  .sq__email small{display:block;margin-top:.5rem;color:#234334}
+  .sq__restart{margin-top:1.25rem;background:none;border:0;color:#7E9B6E;cursor:pointer;text-decoration:underline}
+</style>
+
+<script>
+(function(){
+  var questions = [
+    { q: "¿Cuál es tu principal preocupación?",
+      a: [
+        {t:"Manchas y tono desigual", v:"manchas"},
+        {t:"Piel apagada / sin brillo", v:"opacidad"},
+        {t:"Resequedad y tirantez", v:"resequedad"},
+        {t:"Brillo y grasa", v:"grasa"}
+      ]},
+    { q: "¿Cómo describes tu tipo de piel?",
+      a: [
+        {t:"Seca", v:"seca"},
+        {t:"Mixta", v:"mixta"},
+        {t:"Grasa", v:"grasa"},
+        {t:"Sensible", v:"sensible"}
+      ]},
+    { q: "¿Usas protector solar a diario?",
+      a: [
+        {t:"Sí, todos los días", v:"si"},
+        {t:"A veces", v:"aveces"},
+        {t:"Casi nunca", v:"no"}
+      ]},
+    { q: "¿Qué prefieres para empezar?",
+      a: [
+        {t:"La rutina completa", v:"rutina"},
+        {t:"Un solo producto", v:"unico"}
+      ]}
+  ];
+
+  var products = {
+    serum:   {title:"Sérum Glow — Vitamina C 10% + Niacinamida", url:"/products/serum-glow-vitamina-c",
+              why:"Ilumina y unifica el tono. Tu mejor punto de partida para manchas y opacidad."},
+    hidratante:{title:"Hidratante con Protección Solar FPS 50", url:"/products/hidratante-fps-50",
+              why:"Hidrata y protege del sol colombiano: clave si buscas confort y prevenir manchas."},
+    limpiador:{title:"Gel Limpiador Suave", url:"/products/gel-limpiador-suave",
+              why:"Controla grasa e impurezas sin resecar. El primer paso de toda buena rutina."},
+    kit:     {title:"Kit Esencial 3 Pasos (-29%)", url:"/products/kit-esencial-3-pasos",
+              why:"Limpia, trata y protege en una sola rutina. La opción con mejor resultado y precio."}
+  };
+
+  var answers = [], step = 0;
+  var stepsEl = document.getElementById('sqSteps');
+  var barEl = document.getElementById('sqBar');
+  var resultEl = document.getElementById('sqResult');
+
+  function render(){
+    if(step >= questions.length){ showResult(); return; }
+    var Q = questions[step];
+    var html = '<p class="sq__q">'+ Q.q +'</p><div class="sq__opts">';
+    for(var i=0;i<Q.a.length;i++){
+      html += '<button class="sq__opt" data-v="'+Q.a[i].v+'">'+Q.a[i].t+'</button>';
+    }
+    html += '</div>';
+    stepsEl.innerHTML = html;
+    barEl.style.width = Math.round((step/questions.length)*100) + '%';
+    var btns = stepsEl.querySelectorAll('.sq__opt');
+    for(var j=0;j<btns.length;j++){
+      btns[j].addEventListener('click', function(){
+        answers[step] = this.getAttribute('data-v');
+        step++; render();
+      });
+    }
+  }
+
+  function decide(){
+    var concern = answers[0], skin = answers[1], spf = answers[2], pref = answers[3];
+    if(pref === 'rutina') return 'kit';
+    if(concern === 'manchas' || concern === 'opacidad') return 'serum';
+    if(concern === 'resequedad') return 'hidratante';
+    if(concern === 'grasa') return 'limpiador';
+    return 'serum';
+  }
+
+  function showResult(){
+    barEl.style.width = '100%';
+    stepsEl.innerHTML = '';
+    var key = decide();
+    var p = products[key];
+    document.getElementById('sqRecTitle').textContent = p.title;
+    document.getElementById('sqRecWhy').textContent = p.why;
+    var cta = document.getElementById('sqRecCta');
+    cta.setAttribute('href', p.url);
+    // Sugerencia extra: si no usa protector, recomendar también el FPS
+    var extra = document.getElementById('sqRecExtra');
+    if(key !== 'hidratante' && key !== 'kit' && (answers[2] === 'no' || answers[2] === 'aveces')){
+      extra.innerHTML = 'Tip: suma el <a href="/products/hidratante-fps-50">Hidratante FPS 50</a> para proteger tus resultados.';
+    } else {
+      extra.textContent = '';
+    }
+    resultEl.hidden = false;
+  }
+
+  document.getElementById('sqRestart').addEventListener('click', function(){
+    answers = []; step = 0; resultEl.hidden = true; render();
+  });
+
+  document.getElementById('sqEmail').addEventListener('submit', function(e){
+    e.preventDefault();
+    var email = document.getElementById('sqEmailInput').value;
+    var msg = document.getElementById('sqEmailMsg');
+    // === CONECTAR A KLAVIYO ===
+    // Reemplaza este bloque por la suscripción real (Klaviyo Subscribe API o formulario embebido).
+    // Ejemplo: fetch('https://a.klaviyo.com/client/subscriptions/?company_id=TU_ID', {...})
+    if(email && email.indexOf('@') > 0){
+      msg.textContent = '¡Listo! Revisa tu correo, te enviamos tu rutina y tu 10%.';
+    } else {
+      msg.textContent = 'Ingresa un correo válido, por favor.';
+    }
+  });
+
+  render();
+})();
+</script>

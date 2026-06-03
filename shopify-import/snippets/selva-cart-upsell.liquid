@@ -1,0 +1,64 @@
+{%- comment -%}
+  SELVÁ - Upsell de carrito + barra de envío gratis.
+  Cómo usar (tema Dawn):
+    1) Crea snippets/selva-cart-upsell.liquid con este contenido.
+    2) En sections/cart-drawer.liquid Y en sections/main-cart-footer.liquid
+       agrega:  {% render 'selva-cart-upsell' %}
+    3) Ajusta UMBRAL (en centavos) y el handle del producto de upsell.
+  Nota: la moneda en Liquid se maneja en centavos. $120.000 COP = 12000000.
+{%- endcomment -%}
+
+{%- assign umbral = 12000000 -%}
+{%- assign upsell_handle = 'hidratante-fps-50' -%}
+{%- assign restante = umbral | minus: cart.total_price -%}
+{%- assign progreso = cart.total_price | times: 100 | divided_by: umbral -%}
+{%- if progreso > 100 -%}{%- assign progreso = 100 -%}{%- endif -%}
+
+<div class="selva-cart-extra">
+  {%- comment -%} ---- Barra de envío gratis ---- {%- endcomment -%}
+  <div class="selva-ship">
+    {%- if restante > 0 -%}
+      <p class="selva-ship__txt">Te faltan <strong>{{ restante | money }}</strong> para el <strong>envío GRATIS</strong> 🚚</p>
+    {%- else -%}
+      <p class="selva-ship__txt">🎉 ¡Felicidades! Tienes <strong>envío GRATIS</strong>.</p>
+    {%- endif -%}
+    <div class="selva-ship__bar"><span style="width: {{ progreso }}%;"></span></div>
+  </div>
+
+  {%- comment -%} ---- Upsell: agregar producto complementario ---- {%- endcomment -%}
+  {%- assign upsell = all_products[upsell_handle] -%}
+  {%- if upsell != empty and upsell.available -%}
+    {%- assign en_carrito = false -%}
+    {%- for item in cart.items -%}
+      {%- if item.product.handle == upsell_handle -%}{%- assign en_carrito = true -%}{%- endif -%}
+    {%- endfor -%}
+    {%- unless en_carrito -%}
+      <div class="selva-upsell">
+        <img src="{{ upsell.featured_image | image_url: width: 120 }}" alt="{{ upsell.title | escape }}" loading="lazy" width="60" height="60">
+        <div class="selva-upsell__info">
+          <p class="selva-upsell__title">Complétalo con {{ upsell.title }}</p>
+          <p class="selva-upsell__price">{{ upsell.price | money }}</p>
+        </div>
+        <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data" class="selva-upsell__form">
+          <input type="hidden" name="id" value="{{ upsell.selected_or_first_available_variant.id }}">
+          <input type="hidden" name="quantity" value="1">
+          <button type="submit" class="selva-upsell__btn">Agregar</button>
+        </form>
+      </div>
+    {%- endunless -%}
+  {%- endif -%}
+</div>
+
+<style>
+  .selva-cart-extra{padding:.75rem 1rem;border-top:1px solid rgba(126,155,110,.3);font-size:.9rem;color:#2B2B2B}
+  .selva-ship__txt{margin:0 0 .4rem}
+  .selva-ship__bar{height:8px;background:#e7e0d3;border-radius:999px;overflow:hidden}
+  .selva-ship__bar span{display:block;height:100%;background:#234334;border-radius:999px;transition:width .4s ease}
+  .selva-upsell{display:flex;align-items:center;gap:.6rem;margin-top:.85rem;background:#F4EFE6;border:1px solid rgba(126,155,110,.35);border-radius:10px;padding:.5rem .6rem}
+  .selva-upsell img{border-radius:8px;object-fit:cover}
+  .selva-upsell__info{flex:1;line-height:1.2}
+  .selva-upsell__title{margin:0;font-weight:600;font-size:.85rem}
+  .selva-upsell__price{margin:.15rem 0 0;color:#234334;font-weight:700}
+  .selva-upsell__btn{background:#234334;color:#F4EFE6;border:0;border-radius:8px;padding:.5rem .9rem;cursor:pointer;font-weight:600}
+  .selva-upsell__btn:hover{background:#1b3327}
+</style>

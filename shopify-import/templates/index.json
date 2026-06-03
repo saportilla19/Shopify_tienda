@@ -1,0 +1,192 @@
+{
+  "_comment": "SELVÁ - Home (tema Dawn). Pega este contenido en templates/index.json del tema. Ajusta el handle del producto destacado si difiere.",
+  "sections": {
+    "hero": {
+      "type": "image-banner",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Piel luminosa y uniforme en 4 semanas",
+            "heading_size": "h0"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Sérum Glow con Vitamina C 10% + Niacinamida. Formulado en Colombia, respaldado por la dermociencia.</p>",
+            "text_style": "body"
+          }
+        },
+        "buttons": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "Comprar mi Sérum Glow",
+            "button_link_1": "shopify://products/serum-glow-vitamina-c",
+            "button_style_secondary_1": false,
+            "button_label_2": "Ver el Kit Esencial",
+            "button_link_2": "shopify://products/kit-esencial-3-pasos",
+            "button_style_secondary_2": true
+          }
+        }
+      },
+      "block_order": ["heading", "text", "buttons"],
+      "settings": {
+        "image_overlay_opacity": 20,
+        "image_height": "large",
+        "desktop_content_position": "middle-left",
+        "show_text_box": true,
+        "desktop_content_alignment": "left",
+        "color_scheme": "scheme-1",
+        "image_behavior": "none"
+      }
+    },
+    "trust_bar": {
+      "type": "multicolumn",
+      "blocks": {
+        "c1": { "type": "column", "settings": { "title": "Envío 24-72h", "text": "<p>A todo Colombia</p>" } },
+        "c2": { "type": "column", "settings": { "title": "Paga al recibir", "text": "<p>Contraentrega disponible</p>" } },
+        "c3": { "type": "column", "settings": { "title": "Pago seguro", "text": "<p>Tarjeta, PSE y Nequi</p>" } },
+        "c4": { "type": "column", "settings": { "title": "Garantía 30 días", "text": "<p>O te devolvemos tu dinero</p>" } }
+      },
+      "block_order": ["c1", "c2", "c3", "c4"],
+      "settings": {
+        "title": "",
+        "columns_desktop": 4,
+        "column_alignment": "center",
+        "background_style": "none",
+        "columns_mobile": "2",
+        "color_scheme": "scheme-2"
+      }
+    },
+    "benefits": {
+      "type": "multicolumn",
+      "blocks": {
+        "b1": { "type": "column", "settings": { "title": "Luminosidad visible", "text": "<p>La Vitamina C reactiva el brillo natural de tu piel.</p>" } },
+        "b2": { "type": "column", "settings": { "title": "Menos manchas", "text": "<p>La Niacinamida ayuda a unificar el tono y reducir marcas.</p>" } },
+        "b3": { "type": "column", "settings": { "title": "Hidratación profunda", "text": "<p>Barrera reforzada y piel suave todo el día.</p>" } },
+        "b4": { "type": "column", "settings": { "title": "Apto piel sensible", "text": "<p>Sin parabenos, vegano y dermo-testeado.</p>" } }
+      },
+      "block_order": ["b1", "b2", "b3", "b4"],
+      "settings": {
+        "title": "Por qué tu piel va a amar SELVÁ",
+        "columns_desktop": 4,
+        "column_alignment": "center",
+        "background_style": "primary",
+        "columns_mobile": "1",
+        "color_scheme": "scheme-1"
+      }
+    },
+    "problem_solution": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading": { "type": "heading", "settings": { "heading": "¿Piel apagada, con manchas o reseca?", "heading_size": "h1" } },
+        "text": { "type": "text", "settings": { "text": "<p>El sol de Colombia, la contaminación y las rutinas improvisadas opacan tu piel. No necesitas 10 productos: necesitas los 3 correctos, en el orden correcto. <strong>Limpia, trata y protege</strong> con la rutina SELVÁ.</p>" } },
+        "button": { "type": "button", "settings": { "button_label": "Quiero mi rutina de 3 pasos", "button_link": "shopify://products/kit-esencial-3-pasos" } }
+      },
+      "block_order": ["heading", "text", "button"],
+      "settings": {
+        "layout": "text_first",
+        "desktop_content_position": "middle",
+        "color_scheme": "scheme-2"
+      }
+    },
+    "featured_hero": {
+      "type": "featured-product",
+      "blocks": {
+        "title": { "type": "title", "settings": {} },
+        "rating": { "type": "rating", "settings": {} },
+        "price": { "type": "price", "settings": {} },
+        "variant_picker": { "type": "variant_picker", "settings": { "picker_type": "button" } },
+        "buy_buttons": { "type": "buy_buttons", "settings": { "show_dynamic_checkout": true } },
+        "description": { "type": "description", "settings": {} }
+      },
+      "block_order": ["title", "rating", "price", "variant_picker", "buy_buttons", "description"],
+      "settings": {
+        "product": "serum-glow-vitamina-c",
+        "secondary_background": true,
+        "color_scheme": "scheme-1",
+        "media_size": "medium"
+      }
+    },
+    "offer_kit": {
+      "type": "image-with-text",
+      "blocks": {
+        "caption": { "type": "caption", "settings": { "caption": "OFERTA DE LANZAMIENTO", "text_style": "caption-with-letter-spacing" } },
+        "heading": { "type": "heading", "settings": { "heading": "Kit Esencial 3 Pasos · -29%", "heading_size": "h1" } },
+        "text": { "type": "text", "settings": { "text": "<p>Limpiador + Sérum Glow + Hidratante FPS 50. Antes <s>$267.000</s> ahora <strong>$189.000</strong>. Ahorras $78.000.</p>" } },
+        "button": { "type": "button", "settings": { "button_label": "Quiero el Kit Esencial", "button_link": "shopify://products/kit-esencial-3-pasos" } }
+      },
+      "block_order": ["caption", "heading", "text", "button"],
+      "settings": {
+        "layout": "image_first",
+        "desktop_content_position": "middle",
+        "color_scheme": "scheme-3"
+      }
+    },
+    "reviews_note": {
+      "type": "rich-text",
+      "blocks": {
+        "heading": { "type": "heading", "settings": { "heading": "Más de 18.000 personas ya vieron resultados", "heading_size": "h1" } },
+        "text": { "type": "text", "settings": { "text": "<p>★ 4,8/5 · 2.300+ reseñas verificadas. Conecta tu app de reseñas (Judge.me/Loox) para mostrarlas aquí con foto.</p>" } }
+      },
+      "block_order": ["heading", "text"],
+      "settings": { "desktop_content_position": "center", "content_alignment": "center", "color_scheme": "scheme-2" }
+    },
+    "before_after": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading": { "type": "heading", "settings": { "heading": "Resultados reales, piel real", "heading_size": "h2" } },
+        "text": { "type": "text", "settings": { "text": "<p>Antes y después a las 2 y 4 semanas de uso constante. Resultados individuales; acompaña con protección solar diaria.</p>" } }
+      },
+      "block_order": ["heading", "text"],
+      "settings": { "layout": "text_first", "color_scheme": "scheme-1" }
+    },
+    "guarantee": {
+      "type": "rich-text",
+      "blocks": {
+        "heading": { "type": "heading", "settings": { "heading": "Pruébalo sin riesgo durante 30 días", "heading_size": "h1" } },
+        "text": { "type": "text", "settings": { "text": "<p>Si no ves tu piel más luminosa y uniforme, te devolvemos el 100% de tu dinero. Sin preguntas incómodas.</p>" } },
+        "button": { "type": "button", "settings": { "button_label": "Empezar mi rutina", "button_link": "shopify://products/kit-esencial-3-pasos" } }
+      },
+      "block_order": ["heading", "text", "button"],
+      "settings": { "desktop_content_position": "center", "content_alignment": "center", "color_scheme": "scheme-3" }
+    },
+    "faq": {
+      "type": "collapsible-content",
+      "blocks": {
+        "f1": { "type": "collapsible_row", "settings": { "heading": "¿En cuánto tiempo veo resultados?", "row_content": "<p>La mayoría nota luminosidad entre la semana 2 y 4 con uso diario.</p>" } },
+        "f2": { "type": "collapsible_row", "settings": { "heading": "¿Sirve para piel sensible, grasa o seca?", "row_content": "<p>Sí, la fórmula es apta para todo tipo de piel.</p>" } },
+        "f3": { "type": "collapsible_row", "settings": { "heading": "¿Tienen registro INVIMA?", "row_content": "<p>Sí, todos nuestros productos cumplen la normativa colombiana.</p>" } },
+        "f4": { "type": "collapsible_row", "settings": { "heading": "¿Cuánto tarda el envío?", "row_content": "<p>24-72h en ciudades principales; 2-5 días en el resto del país.</p>" } },
+        "f5": { "type": "collapsible_row", "settings": { "heading": "¿Puedo pagar al recibir?", "row_content": "<p>Sí, ofrecemos contraentrega en las principales ciudades.</p>" } },
+        "f6": { "type": "collapsible_row", "settings": { "heading": "¿Y si no me funciona?", "row_content": "<p>Tienes 30 días de garantía de devolución del dinero.</p>" } }
+      },
+      "block_order": ["f1", "f2", "f3", "f4", "f5", "f6"],
+      "settings": { "heading": "Preguntas frecuentes", "layout": "section", "color_scheme": "scheme-1" }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "blocks": {
+        "heading": { "type": "heading", "settings": { "heading": "Llévate 10% en tu primera compra" } },
+        "paragraph": { "type": "paragraph", "settings": { "text": "<p>Suscríbete y recibe tu cupón + la guía gratis \"Rutina de 3 pasos para piel colombiana\".</p>" } },
+        "email_form": { "type": "email_form", "settings": {} }
+      },
+      "block_order": ["heading", "paragraph", "email_form"],
+      "settings": { "full_width": true, "color_scheme": "scheme-3" }
+    }
+  },
+  "order": [
+    "hero",
+    "trust_bar",
+    "benefits",
+    "problem_solution",
+    "featured_hero",
+    "offer_kit",
+    "reviews_note",
+    "before_after",
+    "guarantee",
+    "faq",
+    "newsletter"
+  ]
+}

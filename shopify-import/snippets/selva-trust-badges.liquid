@@ -1,0 +1,22 @@
+{%- comment -%}
+  SELVÁ - Barra de confianza (trust badges)
+  Uso: colócalo sobre y bajo el botón de compra con  {% render 'selva-trust-badges' %}
+{%- endcomment -%}
+<ul class="selva-trust" role="list">
+  <li><span aria-hidden="true">🔒</span> Pago 100% seguro</li>
+  <li><span aria-hidden="true">💵</span> Paga al recibir</li>
+  <li><span aria-hidden="true">🚚</span> Envío 24-72h</li>
+  <li><span aria-hidden="true">↩️</span> 30 días de garantía</li>
+  <li><span aria-hidden="true">🧪</span> Registro INVIMA</li>
+</ul>
+<style>
+  .selva-trust{
+    display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;
+    list-style:none;padding:.75rem 0;margin:0;
+    font-size:.85rem;line-height:1.2;color:#234334;
+  }
+  .selva-trust li{
+    background:#F4EFE6;border:1px solid rgba(126,155,110,.35);
+    border-radius:999px;padding:.4rem .75rem;white-space:nowrap;
+  }
+</style>
