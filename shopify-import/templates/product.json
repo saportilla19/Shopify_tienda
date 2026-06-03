@@ -1,0 +1,75 @@
+{
+  "_comment": "SELVÁ - Página de producto (tema Dawn). Pega este contenido en templates/product.json. El bloque custom_liquid renderiza los sellos de confianza (requiere el snippet selva-trust-badges.liquid).",
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor": { "type": "text", "settings": { "text": "SELVÁ", "text_style": "uppercase" } },
+        "title": { "type": "title", "settings": {} },
+        "rating": { "type": "rating", "settings": {} },
+        "price": { "type": "price", "settings": {} },
+        "variant_picker": { "type": "variant_picker", "settings": { "picker_type": "button" } },
+        "quantity_selector": { "type": "quantity_selector", "settings": {} },
+        "buy_buttons": { "type": "buy_buttons", "settings": { "show_dynamic_checkout": true } },
+        "trust": { "type": "custom_liquid", "settings": { "custom_liquid": "{% render 'selva-trust-badges' %}" } },
+        "description": { "type": "description", "settings": {} },
+        "ingredients": { "type": "collapsible_tab", "settings": { "heading": "Ingredientes clave", "content": "<p><strong>Vitamina C 10%</strong> (antioxidante, luminosidad), <strong>Niacinamida</strong> (unifica el tono, refuerza la barrera), <strong>Ácido hialurónico</strong> (hidratación). Libre de parabenos. Registro INVIMA.</p>", "icon": "heart" } },
+        "how_to": { "type": "collapsible_tab", "settings": { "heading": "Cómo usar", "content": "<p>1) Limpia tu rostro. 2) Aplica 3-4 gotas de sérum y masajea. 3) Sella con hidratante; de día, termina con protector FPS 50.</p>", "icon": "check_mark" } },
+        "guarantee": { "type": "collapsible_tab", "settings": { "heading": "Envío y garantía", "content": "<p>Envío 24-72h a ciudades principales. Pago contra entrega disponible. Garantía de satisfacción de 30 días o te devolvemos tu dinero.</p>", "icon": "truck" } },
+        "share": { "type": "share", "settings": { "share_label": "Compartir" } }
+      },
+      "block_order": [
+        "vendor",
+        "title",
+        "rating",
+        "price",
+        "variant_picker",
+        "quantity_selector",
+        "buy_buttons",
+        "trust",
+        "description",
+        "ingredients",
+        "how_to",
+        "guarantee",
+        "share"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "color_scheme": "scheme-1",
+        "media_size": "large",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "gallery_layout": "stacked",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "mobile_thumbnails": "show",
+        "hide_variants": true,
+        "enable_video_looping": false
+      }
+    },
+    "product-recommendations": {
+      "type": "product-recommendations",
+      "settings": {
+        "heading": "Otros lo combinan con…",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "color_scheme": "scheme-2",
+        "columns_mobile": "2"
+      }
+    },
+    "reviews_app": {
+      "type": "rich-text",
+      "blocks": {
+        "heading": { "type": "heading", "settings": { "heading": "Reseñas verificadas", "heading_size": "h2" } },
+        "text": { "type": "text", "settings": { "text": "<p>Inserta aquí el bloque de tu app de reseñas (Judge.me/Loox) para mostrar estrellas, número de reseñas y fotos de clientes.</p>" } }
+      },
+      "block_order": ["heading", "text"],
+      "settings": { "content_alignment": "center", "color_scheme": "scheme-1" }
+    }
+  },
+  "order": [
+    "main",
+    "reviews_app",
+    "product-recommendations"
+  ]
+}
